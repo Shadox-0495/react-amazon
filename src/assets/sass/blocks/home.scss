@@ -1,0 +1,10 @@
+.pageSection[data-page="home"] {
+	max-width: 1500px;
+	margin: 0 auto;
+	.contentCard {
+		position: relative;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		z-index: 2;
+	}
+}

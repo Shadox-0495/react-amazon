@@ -1,7 +1,14 @@
 import { useState } from "react";
+import NavBar from "../assets/components/navBar";
+import Home from "./home";
 
 function App() {
-	return <div>asd</div>;
+	return (
+		<>
+			<NavBar />
+			<Home />
+		</>
+	);
 }
 
 export default App;

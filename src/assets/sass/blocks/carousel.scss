@@ -1,0 +1,24 @@
+.carousel-root.banner {
+	max-height: 230px;
+	overflow: visible;
+	& .control-arrow:is(.control-prev, .control-next) {
+		max-height: 230px;
+		width: 80px;
+		padding: 0;
+		opacity: 1;
+		color: #000;
+		border-radius: 0.25rem;
+		border: 2px solid transparent;
+		margin: 2px 0;
+		&:is(:active, :focus, :focus-visible) {
+			border-color: #007185;
+			outline: #fff solid 2px;
+		}
+		&:hover {
+			background: transparent;
+		}
+		&::before {
+			content: unset;
+		}
+	}
+}

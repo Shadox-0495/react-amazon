@@ -1,3 +1,11 @@
-@import "./core/colors.scss";
+@import "react-responsive-carousel/lib/styles/carousel.min.css";
+
+@import "./core/vars.scss";
 @import "./core/mixins.scss";
 @import "./core/reset.scss";
+
+@import "./blocks/navBar.scss";
+@import "./blocks/carousel.scss";
+
+@import "./blocks/pageSection.scss";
+@import "./blocks/home.scss";

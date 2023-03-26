@@ -15,7 +15,7 @@
 			border-color: #fff;
 		}
 		&-sprite {
-			background-image: url("./assets/img/sprites/navSprites.png");
+			background-image: url("/assets/img/sprites/navSprites.png");
 			background-size: 350px;
 			background-repeat: repeat-x;
 			text-indent: -500px;
@@ -122,7 +122,7 @@
 			font-weight: 600;
 		}
 		&-icon {
-			background-image: url("./assets/img/sprites/navSprites.png");
+			background-image: url("/assets/img/sprites/navSprites.png");
 			background-size: 350px;
 			background-position: -10px -340px;
 			background-repeat: repeat-x;

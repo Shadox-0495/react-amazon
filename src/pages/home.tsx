@@ -35,7 +35,7 @@ export default function Home() {
 				})}
 			</Carousel>
 
-			<div className="contentCard">asdasd</div>
+			<div className="contentCard"></div>
 			<div className="contentGrid"></div>
 		</div>
 	);

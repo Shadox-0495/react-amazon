@@ -1,0 +1,42 @@
+.pageSection[data-page="product"] {
+	display: grid;
+	grid-template-columns: auto auto auto;
+	column-gap: 1rem;
+}
+
+.detail {
+	&__name {
+		font-weight: 600;
+		font-size: 1.5rem;
+	}
+	&__image {
+		width: 685px;
+		& > img {
+			width: 100%;
+		}
+	}
+	&__spec {
+		text-align: left;
+		font-size: 0.85rem;
+		& > table {
+			width: 100%;
+		}
+		& th {
+			max-width: 100px;
+			font-weight: 600;
+			& > span {
+				@include truncate-text(2, pre-wrap, break-word);
+			}
+		}
+		& td {
+			vertical-align: top;
+		}
+		& th,
+		& td {
+			padding-bottom: 1rem;
+		}
+	}
+	&__cost {
+		width: 244px;
+	}
+}

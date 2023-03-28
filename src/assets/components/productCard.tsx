@@ -1,4 +1,5 @@
 import React, { Children, cloneElement } from "react";
+import { Link } from "react-router-dom";
 
 export default function ProductCard({ className, title, label, children }: any) {
 	const arrayChildren = Children.toArray(children)!;
@@ -18,8 +19,10 @@ export default function ProductCard({ className, title, label, children }: any) 
 						return (
 							<>
 								<div className="productCard__container">
-									<div className="productCard__image">{cloneElement(child)}</div>
-									{!child.props["data-text"] ? "" : <div className="productCard__text">{child.props["data-text"]}</div>}
+									<Link to={child.props["data-link"]}>
+										<div className="productCard__image">{cloneElement(child)}</div>
+									</Link>
+									{!child.props["data-text"] || child.props["data-text"] == "" ? "" : <div className="productCard__text">{child.props["data-text"]}</div>}
 								</div>
 							</>
 						);

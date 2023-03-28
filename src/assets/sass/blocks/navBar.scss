@@ -116,6 +116,10 @@
 		border-radius: 2px;
 		cursor: pointer;
 		position: relative;
+		color: #fff !important;
+		&:visited {
+			color: #fff !important;
+		}
 		&:is(:hover, :active, :focus, :focus-visible) {
 			border-color: #fff;
 		}

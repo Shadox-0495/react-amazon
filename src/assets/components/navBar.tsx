@@ -1,17 +1,17 @@
 import React from "react";
 import { Search, ArrowDropDown } from "@mui/icons-material";
 import useMemory from "../features/memory";
+import { Link } from "react-router-dom";
 
 export default function NavBar() {
 	const { cart } = useMemory();
-	console.log(cart);
 	return (
 		<nav id="navBar" className="navBar">
 			<div className="navBar__left">
 				<div className="navBar__logo">
-					<a href="#">
+					<Link to="/">
 						<div className="navBar__logo-sprite"></div>
-					</a>
+					</Link>
 				</div>
 			</div>
 			<div className="navBar__center">
@@ -31,10 +31,10 @@ export default function NavBar() {
 					<div className="navBar__returns-l1">Returns</div>
 					<div className="navBar__returns-l2">& Orders</div>
 				</div>
-				<div className="navBar__cart">
+				<Link className="navBar__cart" to="/checkout">
 					<div className="navBar__cart-icon" data-quantity={cart.length || 0}></div>
 					<div className="navBar__cart-text">Cart</div>
-				</div>
+				</Link>
 			</div>
 		</nav>
 	);

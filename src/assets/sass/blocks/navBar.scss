@@ -115,6 +115,7 @@
 		border: 1px solid transparent;
 		border-radius: 2px;
 		cursor: pointer;
+		position: relative;
 		&:is(:hover, :active, :focus, :focus-visible) {
 			border-color: #fff;
 		}
@@ -128,7 +129,18 @@
 			background-repeat: repeat-x;
 			width: 38px;
 			height: 26px;
-			transform: rotateY(180deg);
+			/*transform: rotateY(180deg);*/
+			&[data-quantity] {
+				&::before {
+					position: absolute;
+					top: 0%;
+					left: 35%;
+					transform: translateX(-50%);
+					content: attr(data-quantity);
+					font-weight: 900;
+					color: #f08804;
+				}
+			}
 		}
 	}
 }

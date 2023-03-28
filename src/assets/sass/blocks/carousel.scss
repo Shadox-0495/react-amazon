@@ -21,4 +21,17 @@
 			content: unset;
 		}
 	}
+	& .slider-wrapper.axis-horizontal::before {
+		content: "";
+		position: absolute;
+		top: 250px;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		background: linear-gradient(-180deg, rgba(234, 237, 237, 0), #e3e6e6);
+		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00E3E6E6', endColorstr='#E3E6E6', GradientType=0);
+		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#00E3E6E6', endColorstr='#E3E6E6',GradientType=0)";
+		pointer-events: none;
+		z-index: 1;
+	}
 }

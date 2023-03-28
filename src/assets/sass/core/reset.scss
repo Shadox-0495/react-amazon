@@ -32,14 +32,14 @@ html:focus-within {
 
 body,
 html {
-	background-color: #fff;
+	background-color: #e3e6e6;
 }
 
 body {
 	//background-color: var(--mainBackground);
 	color: #000;
 	font-family: var(--mainFont);
-	@include scrollbar();
+	/*@include scrollbar();*/
 }
 
 /* Set core body defaults */

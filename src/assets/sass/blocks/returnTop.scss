@@ -1,0 +1,12 @@
+.returnTop {
+	background-color: #37475a;
+	@include flex(row, center, center);
+	padding: 15px;
+	color: #fff;
+	font-size: 0.75rem;
+	cursor: pointer;
+
+	&:hover {
+		background-color: #485769;
+	}
+}

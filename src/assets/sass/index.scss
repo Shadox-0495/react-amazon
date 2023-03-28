@@ -1,4 +1,5 @@
 @import "react-responsive-carousel/lib/styles/carousel.min.css";
+@import "react-multi-carousel/lib/styles.css";
 
 @import "./core/vars.scss";
 @import "./core/mixins.scss";
@@ -6,6 +7,9 @@
 
 @import "./blocks/navBar.scss";
 @import "./blocks/carousel.scss";
+@import "./blocks/productCard.scss";
+@import "./blocks/contentCategory.scss";
 
 @import "./blocks/pageSection.scss";
+@import "./blocks/returnTop.scss";
 @import "./blocks/home.scss";

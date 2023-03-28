@@ -1,0 +1,61 @@
+.contentCategory {
+	margin: 0 1.25rem;
+	margin-top: 1.25rem;
+	background-color: #fff;
+	padding: 10px 20px;
+
+	&__title {
+		font-weight: 600;
+		font-size: 1.25rem;
+		margin: 10px 0;
+	}
+
+	& .react-multi-carousel-track {
+		column-gap: 1rem;
+		min-height: 220px;
+	}
+
+	& .react-multi-carousel-item {
+		width: auto !important;
+		min-width: 145px;
+		max-width: 270px;
+		max-height: 200px;
+		position: relative;
+		@include flex(column, center, center);
+		& img {
+			height: auto;
+			width: auto;
+			max-width: 270px;
+			max-height: 200px;
+			vertical-align: middle;
+		}
+	}
+
+	& :is(.react-multiple-carousel__arrow--left, .react-multiple-carousel__arrow--right) {
+		border-radius: unset;
+		height: 50%;
+		background-color: #fff;
+		border: 1.5px solid #000;
+
+		&:is(:active, :focus, :focus-visible) {
+			border-color: #007185;
+		}
+		&::before {
+			color: #000;
+			font-size: 1.25rem;
+			font-weight: 600;
+		}
+	}
+
+	& .react-multiple-carousel__arrow--left {
+		left: 0 !important;
+		border-left-width: 1px;
+		border-radius: 0 0.25rem 0.25rem 0;
+	}
+
+	& .react-multiple-carousel__arrow--right {
+		right: 0 !important;
+		border-right-width: 1px;
+		border-radius: 0.25rem 0 0 0.25rem;
+	}
+}

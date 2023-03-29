@@ -2,6 +2,20 @@
 	display: grid;
 	grid-template-columns: auto auto auto;
 	column-gap: 1rem;
+	background-color: transparent;
+	padding-top: 1.5rem;
+	& > * {
+		z-index: 1;
+	}
+	&::before {
+		content: "";
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		background-color: #fff;
+	}
 }
 
 .detail {
@@ -13,6 +27,25 @@
 		width: 685px;
 		& > img {
 			width: 100%;
+		}
+	}
+	&__rate {
+		color: #ff9900;
+	}
+	&__price {
+		position: relative;
+		font-weight: 600;
+		font-size: 1.5rem;
+		@include flex(row, null, center);
+		column-gap: 0.15rem;
+		& > * {
+			line-height: 110%;
+		}
+		&-symbol,
+		&-fraction {
+			font-weight: 400;
+			font-size: 0.85rem;
+			align-self: flex-start;
 		}
 	}
 	&__spec {
@@ -38,5 +71,50 @@
 	}
 	&__cost {
 		width: 244px;
+		border: 1px solid #d5d9d9;
+		border-radius: 0.5rem;
+		height: fit-content;
+		padding: 14px 18px;
+		@include flex(column);
+		row-gap: 1rem;
+	}
+	&__availability {
+		font-size: 1.15rem;
+		font-weight: 400;
+		color: #007600;
+	}
+	&__btnAdd {
+		width: 100%;
+		border-radius: 99px;
+		cursor: pointer;
+		outline: unset;
+		height: 29px;
+		background-color: #ffd814;
+		border: 1px solid #fcd200;
+		&:hover {
+			background-color: #f7ca00;
+			border-color: #f2c200;
+		}
+		&:focus {
+			border-color: #008296;
+			box-shadow: 0 0 0 3px #c8f3fa, inset 0 0 0 2px #fff;
+		}
+	}
+	&__description {
+		&-title {
+			font-weight: 600;
+			font-size: 1.25rem;
+		}
+		& ul {
+			padding: 0;
+			margin: 0 0 0 18px;
+		}
+
+		& li {
+			font-size: 0.85rem;
+			&:not(:last-child) {
+				margin-bottom: 0.5rem;
+			}
+		}
 	}
 }

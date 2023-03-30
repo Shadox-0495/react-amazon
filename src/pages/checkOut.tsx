@@ -1,25 +1,18 @@
 import React, { useState } from "react";
 import useMemory from "../assets/features/memory";
-import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button } from "@mui/material";
+import ConfirmModal from "../assets/components/confirmModal";
 import { formatRating } from "./product";
 
 export default function CheckOut() {
-	const { cart } = useMemory();
+	const { cart, removeFromCart } = useMemory();
 	const [openModal, setOpenModal] = useState(false);
-	const [modalMsg, setModalMsg] = useState("");
+	const [selectedProduct, setSelectedProduct] = useState({});
 	const subTotal = cart.reduce((a: number, b: any) => a + b["price"] * b["quantity"], 0).toLocaleString("en-US");
 	const totalItems = cart.reduce((a: number, b: any) => a + b["quantity"], 0).toLocaleString("en-US");
 
 	function removeProduct() {
-		setModalMsg("Are you sure you want to remove the selected product from the shopping cart?");
-		setOpenModal(true);
-	}
-
-	function closeModal() {
+		removeFromCart(selectedProduct);
 		setOpenModal(false);
-		setTimeout(() => {
-			setModalMsg("");
-		}, 500);
 	}
 
 	return (
@@ -46,7 +39,13 @@ export default function CheckOut() {
 													<span>{quantity.toLocaleString("en-US")}</span>
 												</span>
 												<span>
-													<button className="checkout__description-remove" onClick={removeProduct}>
+													<button
+														className="checkout__description-remove"
+														onClick={() => {
+															setSelectedProduct(product);
+															setOpenModal(true);
+														}}
+													>
 														Remove
 													</button>
 												</span>
@@ -64,20 +63,9 @@ export default function CheckOut() {
 					</div>
 				</div>
 			</div>
-			<Dialog open={openModal} onClose={closeModal} className="contactMessageDialog" aria-labelledby="alert-dialog-title" aria-describedby="alert-dialog-description">
-				<DialogTitle id="alert-dialog-title"></DialogTitle>
-				<DialogContent>
-					<DialogContentText id="alert-dialog-description">{modalMsg}</DialogContentText>
-				</DialogContent>
-				<DialogActions>
-					<Button onClick={closeModal} autoFocus variant="outlined">
-						Yes
-					</Button>
-					<Button onClick={closeModal} autoFocus variant="outlined">
-						No
-					</Button>
-				</DialogActions>
-			</Dialog>
+			<ConfirmModal title="Remove product" open={openModal} setOpen={setOpenModal} onConfirm={removeProduct}>
+				Are you sure you want to remove the selected product from the shopping cart?
+			</ConfirmModal>
 		</>
 	);
 }

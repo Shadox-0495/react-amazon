@@ -1423,12 +1423,30 @@ export const MemoryProvider = ({ children }: any) => {
 		});
 	};
 
+	const removeFromCart = (product: any) => {
+		let cart = state.cart;
+
+		const index = cart.findIndex((item: any) => item.id == product.id);
+
+		if (index == -1) return;
+
+		cart.splice(index, 1); // remove index from array
+
+		window.localStorage.setItem("cart", JSON.stringify(cart));
+
+		dispatch({
+			type: "REMOVE_PRODUCT",
+			payload: { cart },
+		});
+	};
+
 	const values = {
 		products: state.products,
 		cart: state.cart,
 		spec: state.spec,
 		description: state.description,
 		addToCart,
+		removeFromCart,
 	};
 
 	return <MemoryContext.Provider value={values}>{children}</MemoryContext.Provider>;

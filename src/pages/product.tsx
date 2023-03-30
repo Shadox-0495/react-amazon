@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import useMemory from "../assets/features/memory";
 import parse from "html-react-parser";
 import { Star, StarHalf, StarOutline } from "@mui/icons-material";
 
-export function showRating(rating: number) {
+export function formatRating(rating: number) {
 	const rateString = `${rating}`.split(".");
 	let starsCount = 0;
 	const rate = [];
@@ -47,36 +47,49 @@ export function formatPrice(price: number) {
 }
 
 export default function Product() {
-	const { products } = useMemory();
+	const { products, addToCart, spec, description } = useMemory();
+	const [currentProduct, setCurrentProduct]: any = useState({});
 	const { id } = useParams();
-	const product = products.filter((product) => product.id == id)[0];
+
+	function addProductToCart() {
+		addToCart(currentProduct);
+	}
+
+	useEffect(() => {
+		const product = products.filter((product: any) => product.id == id)[0];
+		product.spec = spec[Math.floor(Math.random() * spec.length)]; //add random specification
+		product.description = description[Math.floor(Math.random() * description.length)]; //add random description
+		setCurrentProduct(product);
+	}, []);
 
 	return (
 		<>
 			<div className="pageSection" data-page="product">
 				<div className="detail__image">
-					<img src={`/assets/img/products/${product.img}`} alt="" />
+					<img src={`/assets/img/products/${currentProduct.img}`} alt="" />
 				</div>
 				<div className="detail__info">
-					<div className="detail__name">{product.name}</div>
-					<div className="detail__rate">{showRating(product.rating).map((item) => item)}</div>
+					<div className="detail__name">{currentProduct.name}</div>
+					<div className="detail__rate">{formatRating(currentProduct.rating).map((item) => item)}</div>
 					<hr />
-					<div className="detail__price" data-price={product.price}>
-						{formatPrice(product.price).map((item) => item)}
+					<div className="detail__price" data-price={currentProduct.price}>
+						{formatPrice(currentProduct.price).map((item) => item)}
 					</div>
-					<div className="detail__spec">{parse(product.spec() || "")}</div>
+					<div className="detail__spec">{parse(currentProduct.spec || "")}</div>
 					<div className="detail__description">
 						<hr />
 						<div className="detail__description-title">About this item</div>
-						{parse(product.description() || "")}
+						{parse(currentProduct.description || "")}
 					</div>
 				</div>
 				<div className="detail__cost">
-					<div className="detail__price" data-price={product.price}>
-						{formatPrice(product.price).map((item) => item)}
+					<div className="detail__price" data-price={currentProduct.price}>
+						{formatPrice(currentProduct.price).map((item) => item)}
 					</div>
 					<div className="detail__availability">In Stock</div>
-					<button className="detail__btnAdd">Add to cart</button>
+					<button className="detail__btnAdd" onClick={addProductToCart}>
+						Add to cart
+					</button>
 				</div>
 			</div>
 		</>

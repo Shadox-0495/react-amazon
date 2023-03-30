@@ -32,7 +32,7 @@ export default function NavBar() {
 					<div className="navBar__returns-l2">& Orders</div>
 				</div>
 				<Link className="navBar__cart" to="/checkout">
-					<div className="navBar__cart-icon" data-quantity={cart.length || 0}></div>
+					<div className="navBar__cart-icon" data-quantity={cart.reduce((a: number, b: any) => a + b["quantity"], 0) || 0}></div>
 					<div className="navBar__cart-text">Cart</div>
 				</Link>
 			</div>

@@ -3,118 +3,17 @@ import React, { createContext, useContext, useReducer } from "react";
 interface data {
 	products: Array<any>;
 	cart: Array<any>;
+	spec: Array<string>;
+	description: Array<string>;
 }
-
-const spec = [
-	`<table>
-		<tbody>
-			<tr>
-				<th><span>Lorem ipsum</span></th>
-				<td>Lorem ipsum dolor sit amet, consectetur</td>
-			</tr>
-			<tr>
-				<th><span>Lorem ipsum dolor sit amet, consectetur</span></th>
-				<td>Lorem ipsum dolor</td>
-			</tr>
-			<tr>
-				<th><span>Lorem ipsum dolor sit amet</span></th>
-				<td>Lorem ipsum dolor sit amet, consectetur adipiscing</td>
-			</tr>
-			<tr>
-				<th><span>Lorem ipsum dolor sit amet, consectetur adipiscing</span></th>
-				<td>Lorem ipsum dolor sit amet, consectetur</td>
-			</tr>
-			<tr>
-				<th><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</span></th>
-				<td>Lorem ipsum dolor sit amet</td>
-			</tr>
-			<tr>
-				<th><span>Lorem ipsum dolor sit amet</span></th>
-				<td>Lorem ipsum</td>
-			</tr>
-			<tr>
-				<th><span>Lorem ipsum</span> </th>
-				<td>Lorem ipsum dolor</td>
-			</tr>
-		</tbody>
-	</table>`,
-	`<table>
-		<tbody>
-			<tr>
-				<th><span>Lorem ipsum dolor sit amet, consectetur adipiscing</span></th>
-				<td>Lorem ipsum dolor sit amet, consectetur</td>
-			</tr>
-			<tr>
-				<th><span>Lorem ipsum dolor sit amet, consectetur</span></th>
-				<td>Lorem ipsum dolor</td>
-			</tr>
-			<tr>
-				<th><span>Lorem ipsum dolor sit amet</span></th>
-				<td>Lorem ipsum dolor sit amet, consectetur adipiscing</td>
-			</tr>
-			<tr>
-				<th><span>Lorem ipsum dolor sit amet</span></th>
-				<td>Lorem ipsum</td>
-			</tr>
-			<tr>
-				<th><span>Lorem ipsum</span></th>
-				<td>Lorem ipsum dolor sit amet, consectetur</td>
-			</tr>
-			<tr>
-				<th><span>Lorem ipsum</span> </th>
-				<td>Lorem ipsum dolor</td>
-			</tr>
-		</tbody>
-	</table>`,
-	`<table>
-		<tbody>
-			<tr>
-				<th><span>Lorem ipsum</span></th>
-				<td>Lorem ipsum dolor sit amet, consectetur</td>
-			</tr>
-			<tr>
-				<th><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</span></th>
-				<td>Lorem ipsum dolor sit amet</td>
-			</tr>
-			<tr>
-				<th><span>Lorem ipsum dolor sit amet</span></th>
-				<td>Lorem ipsum</td>
-			</tr>
-			<tr>
-				<th><span>Lorem ipsum</span></th>
-				<td>Lorem ipsum dolor</td>
-			</tr>
-		</tbody>
-	</table>`,
-];
-
-const description = [
-	`Occaecat mollit consequat mollit consequat veniam voluptate et mollit labore sint adipisicing. Qui consectetur ullamco amet eiusmod amet exercitation consectetur culpa qui anim id consectetur qui sint. Fugiat ex veniam culpa velit. Eu fugiat ad est consectetur consectetur proident minim duis elit pariatur velit. Eiusmod sunt dolore do cillum ex irure eiusmod dolore sint ullamco nisi minim. Proident consectetur cillum tempor sunt ullamco. Reprehenderit mollit consectetur id ex officia ipsum.`,
-	`<ul>
-		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</li>
-		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</li>
-		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</li>
-		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</li>
-		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</li>
-		<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</li>
-	</ul>`,
-	`<ul>
-		<li>🎁 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</li>
-		<li>✨ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</li>
-		<li>🧤 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</li>
-		<li>🎉 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</li>
-		<li>🎊 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</li>
-		<li>🧨 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</li>
-	</ul>`,
-];
 
 const initialState: data = {
 	products: [
 		{
 			id: 1,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "grid1-1.jpg",
 			text: "Labore velit eu labore est ullamco do reprehenderit enim eu aute ad culpa.",
 			price: 19.99,
@@ -123,8 +22,8 @@ const initialState: data = {
 		{
 			id: 2,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "grid1-2.jpg",
 			text: "Labore velit eu labore est ullamco do reprehenderit enim eu aute ad culpa.",
 			price: 20.25,
@@ -133,8 +32,8 @@ const initialState: data = {
 		{
 			id: 3,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "grid1-3.jpg",
 			text: "Labore velit eu labore est ullamco do reprehenderit enim eu aute ad culpa.",
 			price: 29.99,
@@ -143,8 +42,8 @@ const initialState: data = {
 		{
 			id: 4,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "grid1-4.jpg",
 			text: "Labore velit eu labore est ullamco do reprehenderit enim eu aute ad culpa.",
 			price: 40,
@@ -153,8 +52,8 @@ const initialState: data = {
 		{
 			id: 5,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "grid2-1.jpg",
 			text: "Labore velit eu labore est ullamco do reprehenderit enim eu aute ad culpa.",
 			price: 19.99,
@@ -163,8 +62,8 @@ const initialState: data = {
 		{
 			id: 6,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "grid2-2.jpg",
 			text: "Labore velit eu labore est ullamco do reprehenderit enim eu aute ad culpa.",
 			price: 20.25,
@@ -173,8 +72,8 @@ const initialState: data = {
 		{
 			id: 7,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "grid2-3.jpg",
 			text: "Labore velit eu labore est ullamco do reprehenderit enim eu aute ad culpa.",
 			price: 29.99,
@@ -183,8 +82,8 @@ const initialState: data = {
 		{
 			id: 8,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "grid2-4.jpg",
 			text: "Labore velit eu labore est ullamco do reprehenderit enim eu aute ad culpa.",
 			price: 40,
@@ -193,8 +92,8 @@ const initialState: data = {
 		{
 			id: 9,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow1-1.jpg",
 			price: 59.99,
 			rating: 5,
@@ -202,8 +101,8 @@ const initialState: data = {
 		{
 			id: 10,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow1-2.jpg",
 			price: 19.99,
 			rating: 1,
@@ -211,8 +110,8 @@ const initialState: data = {
 		{
 			id: 11,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow1-3.jpg",
 			price: 20.25,
 			rating: 2,
@@ -220,8 +119,8 @@ const initialState: data = {
 		{
 			id: 12,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow1-4.jpg",
 			price: 29.99,
 			rating: 3,
@@ -229,8 +128,8 @@ const initialState: data = {
 		{
 			id: 13,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow1-5.jpg",
 			price: 40,
 			rating: 4,
@@ -238,8 +137,8 @@ const initialState: data = {
 		{
 			id: 14,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow1-6.jpg",
 			price: 59.99,
 			rating: 5,
@@ -247,8 +146,8 @@ const initialState: data = {
 		{
 			id: 15,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow1-7.jpg",
 			price: 19.99,
 			rating: 1.5,
@@ -256,8 +155,8 @@ const initialState: data = {
 		{
 			id: 16,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow1-8.jpg",
 			price: 20.25,
 			rating: 2.5,
@@ -265,8 +164,8 @@ const initialState: data = {
 		{
 			id: 17,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow1-9.jpg",
 			price: 29.99,
 			rating: 3.5,
@@ -274,8 +173,8 @@ const initialState: data = {
 		{
 			id: 18,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow1-10.jpg",
 			price: 40,
 			rating: 4.5,
@@ -283,8 +182,8 @@ const initialState: data = {
 		{
 			id: 19,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow1-11.jpg",
 			price: 59.99,
 			rating: 1.5,
@@ -292,8 +191,8 @@ const initialState: data = {
 		{
 			id: 20,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow1-12.jpg",
 			price: 19.99,
 			rating: 2.5,
@@ -301,8 +200,8 @@ const initialState: data = {
 		{
 			id: 21,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow1-13.jpg",
 			price: 20.25,
 			rating: 3.5,
@@ -310,8 +209,8 @@ const initialState: data = {
 		{
 			id: 22,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow1-14.jpg",
 			price: 29.99,
 			rating: 4.5,
@@ -319,8 +218,8 @@ const initialState: data = {
 		{
 			id: 23,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow1-15.jpg",
 			price: 40,
 			rating: 1,
@@ -328,8 +227,8 @@ const initialState: data = {
 		{
 			id: 24,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow1-16.jpg",
 			price: 59.99,
 			rating: 2,
@@ -337,8 +236,8 @@ const initialState: data = {
 		{
 			id: 25,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow1-17.jpg",
 			price: 19.99,
 			rating: 3,
@@ -346,8 +245,8 @@ const initialState: data = {
 		{
 			id: 26,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow1-18.jpg",
 			price: 20.25,
 			rating: 4,
@@ -355,8 +254,8 @@ const initialState: data = {
 		{
 			id: 27,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow1-19.jpg",
 			price: 29.99,
 			rating: 5,
@@ -364,8 +263,8 @@ const initialState: data = {
 		{
 			id: 28,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow1-20.jpg",
 			price: 40,
 			rating: 1.5,
@@ -373,8 +272,8 @@ const initialState: data = {
 		{
 			id: 29,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow1-21.jpg",
 			price: 59.99,
 			rating: 2.5,
@@ -382,8 +281,8 @@ const initialState: data = {
 		{
 			id: 30,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow1-22.jpg",
 			price: 19.99,
 			rating: 3.5,
@@ -391,8 +290,8 @@ const initialState: data = {
 		{
 			id: 31,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow1-23.jpg",
 			price: 20.25,
 			rating: 4.5,
@@ -400,8 +299,8 @@ const initialState: data = {
 		{
 			id: 32,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow1-24.jpg",
 			price: 29.99,
 			rating: 1,
@@ -409,8 +308,8 @@ const initialState: data = {
 		{
 			id: 33,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow1-25.jpg",
 			price: 40,
 			rating: 2,
@@ -418,8 +317,8 @@ const initialState: data = {
 		{
 			id: 34,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow1-26.jpg",
 			price: 59.99,
 			rating: 3,
@@ -427,8 +326,8 @@ const initialState: data = {
 		{
 			id: 35,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow1-27.jpg",
 			price: 19.99,
 			rating: 4,
@@ -436,8 +335,8 @@ const initialState: data = {
 		{
 			id: 36,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow1-28.jpg",
 			price: 20.25,
 			rating: 5,
@@ -445,8 +344,8 @@ const initialState: data = {
 		{
 			id: 37,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow1-29.jpg",
 			price: 29.99,
 			rating: 1.5,
@@ -454,8 +353,8 @@ const initialState: data = {
 		{
 			id: 38,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow1-30.jpg",
 			price: 40,
 			rating: 2.5,
@@ -463,8 +362,8 @@ const initialState: data = {
 		{
 			id: 39,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow2-1.jpg",
 			price: 59.99,
 			rating: 3.5,
@@ -472,8 +371,8 @@ const initialState: data = {
 		{
 			id: 40,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow2-2.jpg",
 			price: 19.99,
 			rating: 4.5,
@@ -481,8 +380,8 @@ const initialState: data = {
 		{
 			id: 41,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow2-3.jpg",
 			price: 20.25,
 			rating: 1.5,
@@ -490,8 +389,8 @@ const initialState: data = {
 		{
 			id: 42,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow2-4.jpg",
 			price: 29.99,
 			rating: 2.5,
@@ -499,8 +398,8 @@ const initialState: data = {
 		{
 			id: 43,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow2-5.jpg",
 			price: 40,
 			rating: 3.5,
@@ -508,8 +407,8 @@ const initialState: data = {
 		{
 			id: 44,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow2-6.jpg",
 			price: 59.99,
 			rating: 4.5,
@@ -517,8 +416,8 @@ const initialState: data = {
 		{
 			id: 45,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow2-7.jpg",
 			price: 19.99,
 			rating: 1,
@@ -526,8 +425,8 @@ const initialState: data = {
 		{
 			id: 46,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow2-8.jpg",
 			price: 20.25,
 			rating: 2,
@@ -535,8 +434,8 @@ const initialState: data = {
 		{
 			id: 47,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow2-9.jpg",
 			price: 29.99,
 			rating: 3,
@@ -544,8 +443,8 @@ const initialState: data = {
 		{
 			id: 48,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow2-10.jpg",
 			price: 40,
 			rating: 4,
@@ -553,8 +452,8 @@ const initialState: data = {
 		{
 			id: 49,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow2-11.jpg",
 			price: 59.99,
 			rating: 5,
@@ -562,8 +461,8 @@ const initialState: data = {
 		{
 			id: 50,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow2-12.jpg",
 			price: 19.99,
 			rating: 1.5,
@@ -571,8 +470,8 @@ const initialState: data = {
 		{
 			id: 51,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow2-13.jpg",
 			price: 20.25,
 			rating: 2.5,
@@ -580,8 +479,8 @@ const initialState: data = {
 		{
 			id: 52,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow2-14.jpg",
 			price: 29.99,
 			rating: 3.5,
@@ -589,8 +488,8 @@ const initialState: data = {
 		{
 			id: 53,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow2-15.jpg",
 			price: 40,
 			rating: 4.5,
@@ -598,8 +497,8 @@ const initialState: data = {
 		{
 			id: 54,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow2-16.jpg",
 			price: 59.99,
 			rating: 1.5,
@@ -607,8 +506,8 @@ const initialState: data = {
 		{
 			id: 55,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow2-17.jpg",
 			price: 19.99,
 			rating: 2.5,
@@ -616,8 +515,8 @@ const initialState: data = {
 		{
 			id: 56,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow2-18.jpg",
 			price: 20.25,
 			rating: 3.5,
@@ -625,8 +524,8 @@ const initialState: data = {
 		{
 			id: 57,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow2-19.jpg",
 			price: 29.99,
 			rating: 4.5,
@@ -634,8 +533,8 @@ const initialState: data = {
 		{
 			id: 58,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow2-20.jpg",
 			price: 40,
 			rating: 1,
@@ -643,8 +542,8 @@ const initialState: data = {
 		{
 			id: 59,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow3-1.jpg",
 			price: 59.99,
 			rating: 2,
@@ -652,8 +551,8 @@ const initialState: data = {
 		{
 			id: 60,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow3-2.jpg",
 			price: 19.99,
 			rating: 3,
@@ -661,8 +560,8 @@ const initialState: data = {
 		{
 			id: 61,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow3-3.jpg",
 			price: 20.25,
 			rating: 4,
@@ -670,8 +569,8 @@ const initialState: data = {
 		{
 			id: 62,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow3-4.jpg",
 			price: 29.99,
 			rating: 5,
@@ -679,8 +578,8 @@ const initialState: data = {
 		{
 			id: 63,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow3-5.jpg",
 			price: 40,
 			rating: 1.5,
@@ -688,8 +587,8 @@ const initialState: data = {
 		{
 			id: 64,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow3-6.jpg",
 			price: 59.99,
 			rating: 2.5,
@@ -697,8 +596,8 @@ const initialState: data = {
 		{
 			id: 65,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow3-7.jpg",
 			price: 19.99,
 			rating: 3.5,
@@ -706,8 +605,8 @@ const initialState: data = {
 		{
 			id: 66,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow3-8.jpg",
 			price: 20.25,
 			rating: 4.5,
@@ -715,8 +614,8 @@ const initialState: data = {
 		{
 			id: 67,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow3-9.jpg",
 			price: 29.99,
 			rating: 1,
@@ -724,8 +623,8 @@ const initialState: data = {
 		{
 			id: 68,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow3-10.jpg",
 			price: 40,
 			rating: 2,
@@ -733,8 +632,8 @@ const initialState: data = {
 		{
 			id: 69,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow3-11.jpg",
 			price: 59.99,
 			rating: 3,
@@ -742,8 +641,8 @@ const initialState: data = {
 		{
 			id: 70,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow3-12.jpg",
 			price: 19.99,
 			rating: 4,
@@ -751,8 +650,8 @@ const initialState: data = {
 		{
 			id: 71,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow3-13.jpg",
 			price: 20.25,
 			rating: 5,
@@ -760,8 +659,8 @@ const initialState: data = {
 		{
 			id: 72,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow3-14.jpg",
 			price: 29.99,
 			rating: 1.5,
@@ -769,8 +668,8 @@ const initialState: data = {
 		{
 			id: 73,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow3-15.jpg",
 			price: 40,
 			rating: 2.5,
@@ -778,8 +677,8 @@ const initialState: data = {
 		{
 			id: 74,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow3-16.jpg",
 			price: 59.99,
 			rating: 3.5,
@@ -787,8 +686,8 @@ const initialState: data = {
 		{
 			id: 75,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow3-17.jpg",
 			price: 19.99,
 			rating: 4.5,
@@ -796,8 +695,8 @@ const initialState: data = {
 		{
 			id: 76,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow3-18.jpg",
 			price: 20.25,
 			rating: 1,
@@ -805,8 +704,8 @@ const initialState: data = {
 		{
 			id: 77,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow3-19.jpg",
 			price: 29.99,
 			rating: 2,
@@ -814,8 +713,8 @@ const initialState: data = {
 		{
 			id: 78,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow3-20.jpg",
 			price: 40,
 			rating: 3,
@@ -823,8 +722,8 @@ const initialState: data = {
 		{
 			id: 79,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow4-1.jpg",
 			price: 59.99,
 			rating: 4,
@@ -832,8 +731,8 @@ const initialState: data = {
 		{
 			id: 80,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow4-2.jpg",
 			price: 19.99,
 			rating: 5,
@@ -841,8 +740,8 @@ const initialState: data = {
 		{
 			id: 81,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow4-3.jpg",
 			price: 20.25,
 			rating: 1.5,
@@ -850,8 +749,8 @@ const initialState: data = {
 		{
 			id: 82,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow4-4.jpg",
 			price: 29.99,
 			rating: 2.5,
@@ -859,8 +758,8 @@ const initialState: data = {
 		{
 			id: 83,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow4-5.jpg",
 			price: 40,
 			rating: 3.5,
@@ -868,8 +767,8 @@ const initialState: data = {
 		{
 			id: 84,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow4-6.jpg",
 			price: 59.99,
 			rating: 4.5,
@@ -877,8 +776,8 @@ const initialState: data = {
 		{
 			id: 85,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow4-7.jpg",
 			price: 19.99,
 			rating: 1,
@@ -886,8 +785,8 @@ const initialState: data = {
 		{
 			id: 86,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow4-8.jpg",
 			price: 20.25,
 			rating: 2,
@@ -895,8 +794,8 @@ const initialState: data = {
 		{
 			id: 87,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow4-9.jpg",
 			price: 29.99,
 			rating: 3,
@@ -904,8 +803,8 @@ const initialState: data = {
 		{
 			id: 88,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow4-10.jpg",
 			price: 40,
 			rating: 4,
@@ -913,8 +812,8 @@ const initialState: data = {
 		{
 			id: 89,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow4-11.jpg",
 			price: 59.99,
 			rating: 1.5,
@@ -922,8 +821,8 @@ const initialState: data = {
 		{
 			id: 90,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow4-12.jpg",
 			price: 19.99,
 			rating: 2.5,
@@ -931,8 +830,8 @@ const initialState: data = {
 		{
 			id: 91,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow4-13.jpg",
 			price: 20.25,
 			rating: 3.5,
@@ -940,8 +839,8 @@ const initialState: data = {
 		{
 			id: 92,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow4-14.jpg",
 			price: 29.99,
 			rating: 4.5,
@@ -949,8 +848,8 @@ const initialState: data = {
 		{
 			id: 93,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow4-15.jpg",
 			price: 40,
 			rating: 1,
@@ -958,8 +857,8 @@ const initialState: data = {
 		{
 			id: 94,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow4-16.jpg",
 			price: 59.99,
 			rating: 2,
@@ -967,8 +866,8 @@ const initialState: data = {
 		{
 			id: 95,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow4-17.jpg",
 			price: 19.99,
 			rating: 3,
@@ -976,8 +875,8 @@ const initialState: data = {
 		{
 			id: 96,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow4-18.jpg",
 			price: 20.25,
 			rating: 4,
@@ -985,8 +884,8 @@ const initialState: data = {
 		{
 			id: 97,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow4-19.jpg",
 			price: 29.99,
 			rating: 5,
@@ -994,8 +893,8 @@ const initialState: data = {
 		{
 			id: 98,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow4-20.jpg",
 			price: 40,
 			rating: 1.5,
@@ -1003,8 +902,8 @@ const initialState: data = {
 		{
 			id: 99,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow4-21.jpg",
 			price: 59.99,
 			rating: 2.5,
@@ -1012,8 +911,8 @@ const initialState: data = {
 		{
 			id: 100,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow4-22.jpg",
 			price: 19.99,
 			rating: 3.5,
@@ -1021,8 +920,8 @@ const initialState: data = {
 		{
 			id: 101,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow4-23.jpg",
 			price: 20.25,
 			rating: 4.5,
@@ -1030,8 +929,8 @@ const initialState: data = {
 		{
 			id: 102,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "grid3-1.jpg",
 			text: "Labore velit eu labore est ullamco do reprehenderit enim eu aute ad culpa.",
 			price: 29.99,
@@ -1040,8 +939,8 @@ const initialState: data = {
 		{
 			id: 103,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "grid3-2.jpg",
 			text: "Labore velit eu labore est ullamco do reprehenderit enim eu aute ad culpa.",
 			price: 40,
@@ -1050,8 +949,8 @@ const initialState: data = {
 		{
 			id: 104,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "grid3-3.jpg",
 			text: "Labore velit eu labore est ullamco do reprehenderit enim eu aute ad culpa.",
 			price: 59.99,
@@ -1060,8 +959,8 @@ const initialState: data = {
 		{
 			id: 105,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "grid3-4.jpg",
 			text: "Labore velit eu labore est ullamco do reprehenderit enim eu aute ad culpa.",
 			price: 19.99,
@@ -1070,8 +969,8 @@ const initialState: data = {
 		{
 			id: 106,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow5-1.jpg",
 			price: 20.25,
 			rating: 5,
@@ -1079,8 +978,8 @@ const initialState: data = {
 		{
 			id: 107,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow5-2.jpg",
 			price: 29.99,
 			rating: 1.5,
@@ -1088,8 +987,8 @@ const initialState: data = {
 		{
 			id: 108,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow5-3.jpg",
 			price: 40,
 			rating: 2.5,
@@ -1097,8 +996,8 @@ const initialState: data = {
 		{
 			id: 109,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow5-4.jpg",
 			price: 59.99,
 			rating: 3.5,
@@ -1106,8 +1005,8 @@ const initialState: data = {
 		{
 			id: 110,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow5-5.jpg",
 			price: 19.99,
 			rating: 4.5,
@@ -1115,8 +1014,8 @@ const initialState: data = {
 		{
 			id: 111,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow5-6.jpg",
 			price: 20.25,
 			rating: 1,
@@ -1124,8 +1023,8 @@ const initialState: data = {
 		{
 			id: 112,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow5-7.jpg",
 			price: 29.99,
 			rating: 2,
@@ -1133,8 +1032,8 @@ const initialState: data = {
 		{
 			id: 113,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow5-8.jpg",
 			price: 40,
 			rating: 3,
@@ -1142,8 +1041,8 @@ const initialState: data = {
 		{
 			id: 114,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow5-9.jpg",
 			price: 59.99,
 			rating: 4,
@@ -1151,8 +1050,8 @@ const initialState: data = {
 		{
 			id: 115,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow5-10.jpg",
 			price: 19.99,
 			rating: 5,
@@ -1160,8 +1059,8 @@ const initialState: data = {
 		{
 			id: 116,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow5-11.jpg",
 			price: 20.25,
 			rating: 1.5,
@@ -1169,8 +1068,8 @@ const initialState: data = {
 		{
 			id: 117,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow5-12.jpg",
 			price: 29.99,
 			rating: 2.5,
@@ -1178,8 +1077,8 @@ const initialState: data = {
 		{
 			id: 118,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow5-13.jpg",
 			price: 40,
 			rating: 3.5,
@@ -1187,8 +1086,8 @@ const initialState: data = {
 		{
 			id: 119,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow5-14.jpg",
 			price: 59.99,
 			rating: 4.5,
@@ -1196,8 +1095,8 @@ const initialState: data = {
 		{
 			id: 120,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow5-15.jpg",
 			price: 19.99,
 			rating: 1,
@@ -1205,8 +1104,8 @@ const initialState: data = {
 		{
 			id: 121,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow5-16.jpg",
 			price: 20.25,
 			rating: 2,
@@ -1214,8 +1113,8 @@ const initialState: data = {
 		{
 			id: 122,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow5-17.jpg",
 			price: 29.99,
 			rating: 3,
@@ -1223,8 +1122,8 @@ const initialState: data = {
 		{
 			id: 123,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow6-1.jpg",
 			price: 40,
 			rating: 4,
@@ -1232,8 +1131,8 @@ const initialState: data = {
 		{
 			id: 124,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow6-2.jpg",
 			price: 59.99,
 			rating: 1.5,
@@ -1241,8 +1140,8 @@ const initialState: data = {
 		{
 			id: 125,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow6-3.jpg",
 			price: 19.99,
 			rating: 2.5,
@@ -1250,8 +1149,8 @@ const initialState: data = {
 		{
 			id: 126,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow6-4.jpg",
 			price: 20.25,
 			rating: 3.5,
@@ -1259,8 +1158,8 @@ const initialState: data = {
 		{
 			id: 127,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow6-5.jpg",
 			price: 29.99,
 			rating: 4.5,
@@ -1268,8 +1167,8 @@ const initialState: data = {
 		{
 			id: 128,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow6-6.jpg",
 			price: 40,
 			rating: 1,
@@ -1277,8 +1176,8 @@ const initialState: data = {
 		{
 			id: 129,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow6-7.jpg",
 			price: 59.99,
 			rating: 2,
@@ -1286,8 +1185,8 @@ const initialState: data = {
 		{
 			id: 130,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow6-8.jpg",
 			price: 19.99,
 			rating: 3,
@@ -1295,8 +1194,8 @@ const initialState: data = {
 		{
 			id: 131,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow6-9.jpg",
 			price: 20.25,
 			rating: 4,
@@ -1304,8 +1203,8 @@ const initialState: data = {
 		{
 			id: 132,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow6-10.jpg",
 			price: 29.99,
 			rating: 5,
@@ -1313,8 +1212,8 @@ const initialState: data = {
 		{
 			id: 133,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow6-11.jpg",
 			price: 40,
 			rating: 1.5,
@@ -1322,8 +1221,8 @@ const initialState: data = {
 		{
 			id: 134,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow6-12.jpg",
 			price: 59.99,
 			rating: 2.5,
@@ -1331,8 +1230,8 @@ const initialState: data = {
 		{
 			id: 135,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow6-13.jpg",
 			price: 19.99,
 			rating: 3.5,
@@ -1340,8 +1239,8 @@ const initialState: data = {
 		{
 			id: 136,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow6-14.jpg",
 			price: 20.25,
 			rating: 4.5,
@@ -1349,8 +1248,8 @@ const initialState: data = {
 		{
 			id: 137,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow6-15.jpg",
 			price: 29.99,
 			rating: 5,
@@ -1358,8 +1257,8 @@ const initialState: data = {
 		{
 			id: 138,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow6-16.jpg",
 			price: 40,
 			rating: 1,
@@ -1367,8 +1266,8 @@ const initialState: data = {
 		{
 			id: 139,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow6-17.jpg",
 			price: 59.99,
 			rating: 2,
@@ -1376,12 +1275,113 @@ const initialState: data = {
 		{
 			id: 140,
 			name: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus feugiat metus, vitae convallis libero.",
-			spec: () => spec[Math.floor(Math.random() * spec.length)],
-			description: () => description[Math.floor(Math.random() * description.length)],
+			spec: "",
+			description: "",
 			img: "slideShow6-18.jpg",
 			price: 19.99,
 			rating: 3,
 		},
+	],
+	spec: [
+		`<table>
+			<tbody>
+				<tr>
+					<th><span>Lorem ipsum</span></th>
+					<td>Lorem ipsum dolor sit amet, consectetur</td>
+				</tr>
+				<tr>
+					<th><span>Lorem ipsum dolor sit amet, consectetur</span></th>
+					<td>Lorem ipsum dolor</td>
+				</tr>
+				<tr>
+					<th><span>Lorem ipsum dolor sit amet</span></th>
+					<td>Lorem ipsum dolor sit amet, consectetur adipiscing</td>
+				</tr>
+				<tr>
+					<th><span>Lorem ipsum dolor sit amet, consectetur adipiscing</span></th>
+					<td>Lorem ipsum dolor sit amet, consectetur</td>
+				</tr>
+				<tr>
+					<th><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</span></th>
+					<td>Lorem ipsum dolor sit amet</td>
+				</tr>
+				<tr>
+					<th><span>Lorem ipsum dolor sit amet</span></th>
+					<td>Lorem ipsum</td>
+				</tr>
+				<tr>
+					<th><span>Lorem ipsum</span> </th>
+					<td>Lorem ipsum dolor</td>
+				</tr>
+			</tbody>
+		</table>`,
+		`<table>
+			<tbody>
+				<tr>
+					<th><span>Lorem ipsum dolor sit amet, consectetur adipiscing</span></th>
+					<td>Lorem ipsum dolor sit amet, consectetur</td>
+				</tr>
+				<tr>
+					<th><span>Lorem ipsum dolor sit amet, consectetur</span></th>
+					<td>Lorem ipsum dolor</td>
+				</tr>
+				<tr>
+					<th><span>Lorem ipsum dolor sit amet</span></th>
+					<td>Lorem ipsum dolor sit amet, consectetur adipiscing</td>
+				</tr>
+				<tr>
+					<th><span>Lorem ipsum dolor sit amet</span></th>
+					<td>Lorem ipsum</td>
+				</tr>
+				<tr>
+					<th><span>Lorem ipsum</span></th>
+					<td>Lorem ipsum dolor sit amet, consectetur</td>
+				</tr>
+				<tr>
+					<th><span>Lorem ipsum</span> </th>
+					<td>Lorem ipsum dolor</td>
+				</tr>
+			</tbody>
+		</table>`,
+		`<table>
+			<tbody>
+				<tr>
+					<th><span>Lorem ipsum</span></th>
+					<td>Lorem ipsum dolor sit amet, consectetur</td>
+				</tr>
+				<tr>
+					<th><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</span></th>
+					<td>Lorem ipsum dolor sit amet</td>
+				</tr>
+				<tr>
+					<th><span>Lorem ipsum dolor sit amet</span></th>
+					<td>Lorem ipsum</td>
+				</tr>
+				<tr>
+					<th><span>Lorem ipsum</span></th>
+					<td>Lorem ipsum dolor</td>
+				</tr>
+			</tbody>
+		</table>`,
+	],
+	description: [
+		`<div>Occaecat mollit consequat mollit consequat veniam voluptate et mollit labore sint adipisicing. Qui consectetur ullamco amet eiusmod amet exercitation consectetur culpa qui anim id consectetur qui sint. Fugiat ex veniam culpa velit. Eu fugiat ad est consectetur consectetur proident minim duis elit pariatur velit. Eiusmod sunt dolore do cillum ex irure eiusmod dolore sint ullamco nisi minim. Proident consectetur cillum tempor sunt ullamco. Reprehenderit mollit consectetur id ex officia ipsum.</div>`,
+		`<ul>
+			<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</li>
+			<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</li>
+			<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</li>
+			<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</li>
+			<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</li>
+			<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</li>
+		</ul>`,
+		`<ul>
+			<li>🎁 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</li>
+			<li>✨ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</li>
+			<li>🧤 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</li>
+			<li>🎉 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</li>
+			<li>🎊 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</li>
+			<li>🧨 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</li>
+		</ul>`,
 	],
 	cart: [],
 };
@@ -1392,11 +1392,9 @@ const memoryReducer = (state: any, action: any) => {
 	const { type, payload } = action;
 	switch (type) {
 		case "ADD_PRODUCT":
-			console.log(payload);
-			return { ...state, objects: payload.product };
+			return { ...state, cart: payload.cart };
 		case "REMOVE_PRODUCT":
-			console.log(payload);
-			return { ...state, objects: payload.product };
+			return { ...state, cart: payload.cart };
 		default:
 			throw new Error(`No case for type: ${type} in reducer`);
 	}
@@ -1408,24 +1406,35 @@ export const MemoryProvider = ({ children }: any) => {
 	const [state, dispatch] = useReducer(memoryReducer, initialState);
 
 	const addToCart = (product: any) => {
-		const updateCart = state.products.concat(product);
-		window.localStorage.setItem("cart", updateCart);
+		let cart = state.cart;
+		const index = cart.findIndex((item: any) => item.id == product.id); //find if the product is alredy in the cart, if so get the index
+		if (cart.length != 0 && index != -1) {
+			cart[index].quantity += 1; //if the product is alredy in the cart update the quantity
+		} else {
+			//else add the product with a quanity of 1
+			product.quantity = 1;
+			cart = cart.concat(product);
+		}
+
+		window.localStorage.setItem("cart", JSON.stringify(cart));
 		dispatch({
 			type: "ADD_PRODUCT",
-			payload: { cart: updateCart },
+			payload: { cart },
 		});
 	};
 
 	const values = {
 		products: state.products,
 		cart: state.cart,
+		spec: state.spec,
+		description: state.description,
 		addToCart,
 	};
 
 	return <MemoryContext.Provider value={values}>{children}</MemoryContext.Provider>;
 };
 
-const useMemory = () => {
+const useMemory: any = () => {
 	const context = useContext(MemoryContext);
 	return context;
 };

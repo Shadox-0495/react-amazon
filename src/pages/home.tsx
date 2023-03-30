@@ -69,7 +69,7 @@ export default function Home() {
 					<ProductCard title="Gaming accessories" label="See more">
 						{products
 							.filter((product: any) => product.img.includes("grid1-"))
-							.map((product) => (
+							.map((product: any) => (
 								<img src={`/assets/img/products/${product.img}`} alt="" data-text={product.text} data-link={`/product/${product.id}`} />
 							))}
 					</ProductCard>
@@ -87,7 +87,7 @@ export default function Home() {
 					<ProductCard title="Shop By Category">
 						{products
 							.filter((product: any) => product.img.includes("grid2-"))
-							.map((product) => (
+							.map((product: any) => (
 								<img src={`/assets/img/products/${product.img}`} alt="" data-text={product.text} data-link={`/product/${product.id}`} />
 							))}
 					</ProductCard>
@@ -112,7 +112,7 @@ export default function Home() {
 						<Carousel arrows responsive={responsive}>
 							{products
 								.filter((product: any) => product.img.includes("slideShow1-"))
-								.map((product) => {
+								.map((product: any) => {
 									return (
 										<Link to={`/product/${product.id}`}>
 											<img src={`/assets/img/products/${product.img}`} alt="" data-text={product.text} />
@@ -128,7 +128,7 @@ export default function Home() {
 						<Carousel responsive={responsive}>
 							{products
 								.filter((product: any) => product.img.includes("slideShow2-"))
-								.map((product) => {
+								.map((product: any) => {
 									return (
 										<Link to={`/product/${product.id}`}>
 											<img src={`/assets/img/products/${product.img}`} alt="" data-text={product.text} />
@@ -162,7 +162,7 @@ export default function Home() {
 						<Carousel responsive={responsive}>
 							{products
 								.filter((product: any) => product.img.includes("slideShow3-"))
-								.map((product) => {
+								.map((product: any) => {
 									return (
 										<Link to={`/product/${product.id}`}>
 											<img src={`/assets/img/products/${product.img}`} alt="" data-text={product.text} />
@@ -178,7 +178,7 @@ export default function Home() {
 						<Carousel responsive={responsive}>
 							{products
 								.filter((product: any) => product.img.includes("slideShow4-"))
-								.map((product) => {
+								.map((product: any) => {
 									return (
 										<Link to={`/product/${product.id}`}>
 											<img src={`/assets/img/products/${product.img}`} alt="" data-text={product.text} />
@@ -200,7 +200,7 @@ export default function Home() {
 						<ProductCard title="Gaming merchandise" label="Shop Now">
 							{products
 								.filter((product: any) => product.img.includes("grid3-"))
-								.map((product) => (
+								.map((product: any) => (
 									<img src={`/assets/img/products/${product.img}`} alt="" data-text={product.text} data-link={`/product/${product.id}`} />
 								))}
 						</ProductCard>
@@ -216,7 +216,7 @@ export default function Home() {
 						<Carousel responsive={responsive}>
 							{products
 								.filter((product: any) => product.img.includes("slideShow5-"))
-								.map((product) => {
+								.map((product: any) => {
 									return (
 										<Link to={`/product/${product.id}`}>
 											<img src={`/assets/img/products/${product.img}`} alt="" data-text={product.text} />
@@ -232,7 +232,7 @@ export default function Home() {
 						<Carousel responsive={responsive}>
 							{products
 								.filter((product: any) => product.img.includes("slideShow6-"))
-								.map((product) => {
+								.map((product: any) => {
 									return (
 										<Link to={`/product/${product.id}`}>
 											<img src={`/assets/img/products/${product.img}`} alt="" data-text={product.text} />

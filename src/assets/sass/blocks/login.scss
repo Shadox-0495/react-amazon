@@ -1,0 +1,28 @@
+.login {
+	max-width: clamp(400px, 2.75rem, 4rem);
+	@include flex(column);
+	row-gap: 1rem;
+	padding: 0.5rem 0.75rem;
+	&__header {
+		font-weight: 600;
+		font-size: 1.25rem;
+	}
+	&__body {
+		@include flex(column);
+		row-gap: 1rem;
+	}
+	&__footer {
+		@include flex(row, center, center);
+		column-gap: 0.5rem;
+	}
+	&[data-type="login"] {
+		& .login__confirmPass {
+			display: none;
+		}
+	}
+	&[data-type="logout"] {
+		& .login__body {
+			display: none;
+		}
+	}
+}

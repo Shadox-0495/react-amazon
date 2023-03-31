@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useReducer } from "react";
+import React, { createContext, useContext, useReducer, useEffect, useState } from "react";
 import dbProducts from "../db/products.json";
+import { auth, db, loginProviders } from "./fireBase";
 
 interface data {
 	products: Array<any>;
@@ -132,6 +133,7 @@ const MemoryContext = createContext(initialState);
 
 export const MemoryProvider = ({ children }: any) => {
 	const [state, dispatch] = useReducer(memoryReducer, initialState);
+	const [currentUser, setCurrentUser] = useState();
 
 	const addToCart = (product: any) => {
 		let cart = state.cart;
@@ -168,13 +170,51 @@ export const MemoryProvider = ({ children }: any) => {
 		});
 	};
 
+	const signInWithProvider = (provider: any) => {
+		console.log(provider);
+		return auth.signInWithPopup(provider);
+	};
+
+	function getCollection(collectionName: string = "", documentName: string = "") {
+		if (collectionName === "") {
+			return;
+		}
+		if (documentName === "") {
+			return db.collection(collectionName).get();
+		}
+		return db.collection(collectionName).doc(documentName).get();
+	}
+
+	function signup(email: string, password: string) {
+		return auth.createUserWithEmailAndPassword(email, password);
+	}
+
+	function logIn(email: string, password: string) {
+		return auth.signInWithEmailAndPassword(email, password);
+	}
+
+	function logOut() {
+		return auth.signOut();
+	}
+
+	useEffect(() => {
+		const unsubscribe = auth.onAuthStateChanged((user: any) => setCurrentUser(user));
+		return unsubscribe;
+	}, []);
+
 	const values = {
 		products: state.products,
 		cart: state.cart,
 		spec: state.spec,
 		description: state.description,
+		currentUser,
+		loginProviders,
 		addToCart,
 		removeFromCart,
+		signup,
+		logIn,
+		signInWithProvider,
+		logOut,
 	};
 
 	return <MemoryContext.Provider value={values}>{children}</MemoryContext.Provider>;

@@ -75,13 +75,6 @@
 		}
 		&-l1 {
 			line-height: 110%;
-			&::after {
-				content: "sign in";
-				margin-left: 0.25rem;
-			}
-			&[data-user]::after {
-				content: attr(data-user);
-			}
 		}
 		&-l2 {
 			@include flex(row, null, center);

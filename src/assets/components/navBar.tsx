@@ -4,7 +4,7 @@ import useMemory from "../features/memory";
 import { Link } from "react-router-dom";
 
 export default function NavBar() {
-	const { cart } = useMemory();
+	const { cart, currentUser } = useMemory();
 	return (
 		<nav id="navBar" className="navBar">
 			<div className="navBar__left">
@@ -22,7 +22,7 @@ export default function NavBar() {
 			</div>
 			<div className="navBar__right">
 				<div className="navBar__login">
-					<div className="navBar__login-l1">Hello,</div>
+					<div className="navBar__login-l1">Hello, {!currentUser ? "sign in" : currentUser.multiFactor.user.email.split("@")[0]}</div>
 					<div className="navBar__login-l2">
 						Accounts & Lists <ArrowDropDown />{" "}
 					</div>

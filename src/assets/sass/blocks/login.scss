@@ -1,8 +1,11 @@
 .login {
-	max-width: clamp(400px, 2.75rem, 4rem);
+	max-width: clamp(300px, 2.75rem, 4rem);
+	min-width: 300px;
 	@include flex(column);
 	row-gap: 1rem;
 	padding: 0.5rem 0.75rem;
+	background-color: #fff;
+	border-radius: 0.5rem;
 	&__header {
 		font-weight: 600;
 		font-size: 1.25rem;
@@ -12,8 +15,10 @@
 		row-gap: 1rem;
 	}
 	&__footer {
+		color: #000;
 		@include flex(row, center, center);
 		column-gap: 0.5rem;
+		font-size: 0.85rem;
 	}
 	&[data-type="login"] {
 		& .login__confirmPass {

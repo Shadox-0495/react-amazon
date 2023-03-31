@@ -5,7 +5,6 @@ import { ArrowBackIosNew, ArrowForwardIos } from "@mui/icons-material";
 import ProductCard from "../assets/components/productCard";
 import { Link } from "react-router-dom";
 import useMemory from "../assets/features/memory";
-import Login from "../assets/components/login";
 
 export default function Home() {
 	const { products } = useMemory();
@@ -247,7 +246,6 @@ export default function Home() {
 			<div className="returnTop" onClick={backToTop}>
 				Back to top
 			</div>
-			<Login />
 		</>
 	);
 }

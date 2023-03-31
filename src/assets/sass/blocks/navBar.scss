@@ -6,7 +6,7 @@
 	color: #fff;
 	height: 60px;
 	position: relative;
-	z-index: 2;
+	z-index: 3;
 	&__logo {
 		height: 50px;
 		padding: 1px 8px 0 6px;
@@ -65,13 +65,21 @@
 		}
 	}
 	&__login {
-		font-size: 0.75rem;
-		cursor: pointer;
-		border: 1px solid transparent;
-		border-radius: 2px;
-		padding: 8px 8px 5px 8px;
-		&:is(:hover, :active, :focus, :focus-visible) {
-			border-color: #fff;
+		position: relative;
+		&.open {
+			.navBar__login-dropdown {
+				display: block;
+			}
+		}
+		&-btn {
+			font-size: 0.75rem;
+			cursor: pointer;
+			border: 1px solid transparent;
+			border-radius: 2px;
+			padding: 8px 8px 5px 8px;
+			&:is(:hover, :active, :focus, :focus-visible) {
+				border-color: #fff;
+			}
 		}
 		&-l1 {
 			line-height: 110%;
@@ -83,6 +91,23 @@
 			& > svg {
 				font-size: 1.25rem;
 				color: #a7acb2;
+			}
+		}
+		&-dropdown {
+			position: absolute;
+			top: calc(110% + 5.5px);
+			left: 50%;
+			transform: translate(-50%);
+			display: none;
+			&::before {
+				content: "";
+				width: 20px;
+				height: 20px;
+				position: absolute;
+				top: -5px;
+				left: 50%;
+				transform: translate(-50%) rotate(45deg);
+				background-color: #fff;
 			}
 		}
 	}

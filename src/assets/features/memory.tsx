@@ -7,6 +7,7 @@ interface data {
 	cart: Array<any>;
 	spec: Array<string>;
 	description: Array<string>;
+	showLoginDropdown: boolean;
 }
 
 const initialState: data = {
@@ -113,6 +114,7 @@ const initialState: data = {
 		</ul>`,
 	],
 	cart: [],
+	showLoginDropdown: false,
 };
 
 if (window.localStorage.getItem("cart") !== "undefined" && window.localStorage.getItem("cart") !== null) initialState.cart = JSON.parse(`${window.localStorage.getItem("cart")}`);
@@ -124,6 +126,8 @@ const memoryReducer = (state: any, action: any) => {
 			return { ...state, cart: payload.cart };
 		case "REMOVE_PRODUCT":
 			return { ...state, cart: payload.cart };
+		case "SHOW_LOGIN":
+			return { ...state, showLoginDropdown: payload.show };
 		default:
 			throw new Error(`No case for type: ${type} in reducer`);
 	}
@@ -170,6 +174,13 @@ export const MemoryProvider = ({ children }: any) => {
 		});
 	};
 
+	const showLogin = (show: boolean) => {
+		dispatch({
+			type: "SHOW_LOGIN",
+			payload: { show },
+		});
+	};
+
 	const signInWithProvider = (provider: any) => {
 		console.log(provider);
 		return auth.signInWithPopup(provider);
@@ -207,6 +218,8 @@ export const MemoryProvider = ({ children }: any) => {
 		cart: state.cart,
 		spec: state.spec,
 		description: state.description,
+		showLoginDropdown: state.showLoginDropdown,
+		showLogin,
 		currentUser,
 		loginProviders,
 		addToCart,

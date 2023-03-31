@@ -2,9 +2,13 @@ import React from "react";
 import { Search, ArrowDropDown } from "@mui/icons-material";
 import useMemory from "../features/memory";
 import { Link } from "react-router-dom";
+import Login from "./login";
 
 export default function NavBar() {
-	const { cart, currentUser } = useMemory();
+	const { cart, currentUser, showLoginDropdown, showLogin } = useMemory();
+	function showLoginForm() {
+		showLogin(!showLoginDropdown);
+	}
 	return (
 		<nav id="navBar" className="navBar">
 			<div className="navBar__left">
@@ -21,10 +25,15 @@ export default function NavBar() {
 				</button>
 			</div>
 			<div className="navBar__right">
-				<div className="navBar__login">
-					<div className="navBar__login-l1">Hello, {!currentUser ? "sign in" : currentUser.multiFactor.user.email.split("@")[0]}</div>
-					<div className="navBar__login-l2">
-						Accounts & Lists <ArrowDropDown />{" "}
+				<div className={`navBar__login ${showLoginDropdown ? "open" : "close"}`}>
+					<div className="navBar__login-btn" onClick={showLoginForm}>
+						<div className="navBar__login-l1">Hello, {!currentUser ? "sign in" : currentUser.multiFactor.user.email.split("@")[0]}</div>
+						<div className="navBar__login-l2">
+							Accounts & Lists <ArrowDropDown />{" "}
+						</div>
+					</div>
+					<div className="navBar__login-dropdown">
+						<Login />
 					</div>
 				</div>
 				<div className="navBar__returns">

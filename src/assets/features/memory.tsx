@@ -1,6 +1,9 @@
 import React, { createContext, useContext, useReducer, useEffect, useState } from "react";
 import dbProducts from "../db/products.json";
+import dbSpecs from "../db/specs.json";
+import dbDescriptions from "../db/description.json";
 import { auth, db, loginProviders } from "./fireBase";
+import { toast } from "react-toastify";
 
 interface data {
 	products: Array<any>;
@@ -12,107 +15,8 @@ interface data {
 
 const initialState: data = {
 	products: dbProducts,
-	spec: [
-		`<table>
-			<tbody>
-				<tr>
-					<th><span>Lorem ipsum</span></th>
-					<td>Lorem ipsum dolor sit amet, consectetur</td>
-				</tr>
-				<tr>
-					<th><span>Lorem ipsum dolor sit amet, consectetur</span></th>
-					<td>Lorem ipsum dolor</td>
-				</tr>
-				<tr>
-					<th><span>Lorem ipsum dolor sit amet</span></th>
-					<td>Lorem ipsum dolor sit amet, consectetur adipiscing</td>
-				</tr>
-				<tr>
-					<th><span>Lorem ipsum dolor sit amet, consectetur adipiscing</span></th>
-					<td>Lorem ipsum dolor sit amet, consectetur</td>
-				</tr>
-				<tr>
-					<th><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</span></th>
-					<td>Lorem ipsum dolor sit amet</td>
-				</tr>
-				<tr>
-					<th><span>Lorem ipsum dolor sit amet</span></th>
-					<td>Lorem ipsum</td>
-				</tr>
-				<tr>
-					<th><span>Lorem ipsum</span> </th>
-					<td>Lorem ipsum dolor</td>
-				</tr>
-			</tbody>
-		</table>`,
-		`<table>
-			<tbody>
-				<tr>
-					<th><span>Lorem ipsum dolor sit amet, consectetur adipiscing</span></th>
-					<td>Lorem ipsum dolor sit amet, consectetur</td>
-				</tr>
-				<tr>
-					<th><span>Lorem ipsum dolor sit amet, consectetur</span></th>
-					<td>Lorem ipsum dolor</td>
-				</tr>
-				<tr>
-					<th><span>Lorem ipsum dolor sit amet</span></th>
-					<td>Lorem ipsum dolor sit amet, consectetur adipiscing</td>
-				</tr>
-				<tr>
-					<th><span>Lorem ipsum dolor sit amet</span></th>
-					<td>Lorem ipsum</td>
-				</tr>
-				<tr>
-					<th><span>Lorem ipsum</span></th>
-					<td>Lorem ipsum dolor sit amet, consectetur</td>
-				</tr>
-				<tr>
-					<th><span>Lorem ipsum</span> </th>
-					<td>Lorem ipsum dolor</td>
-				</tr>
-			</tbody>
-		</table>`,
-		`<table>
-			<tbody>
-				<tr>
-					<th><span>Lorem ipsum</span></th>
-					<td>Lorem ipsum dolor sit amet, consectetur</td>
-				</tr>
-				<tr>
-					<th><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</span></th>
-					<td>Lorem ipsum dolor sit amet</td>
-				</tr>
-				<tr>
-					<th><span>Lorem ipsum dolor sit amet</span></th>
-					<td>Lorem ipsum</td>
-				</tr>
-				<tr>
-					<th><span>Lorem ipsum</span></th>
-					<td>Lorem ipsum dolor</td>
-				</tr>
-			</tbody>
-		</table>`,
-	],
-	description: [
-		`<div>Occaecat mollit consequat mollit consequat veniam voluptate et mollit labore sint adipisicing. Qui consectetur ullamco amet eiusmod amet exercitation consectetur culpa qui anim id consectetur qui sint. Fugiat ex veniam culpa velit. Eu fugiat ad est consectetur consectetur proident minim duis elit pariatur velit. Eiusmod sunt dolore do cillum ex irure eiusmod dolore sint ullamco nisi minim. Proident consectetur cillum tempor sunt ullamco. Reprehenderit mollit consectetur id ex officia ipsum.</div>`,
-		`<ul>
-			<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</li>
-			<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</li>
-			<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</li>
-			<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</li>
-			<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</li>
-			<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</li>
-		</ul>`,
-		`<ul>
-			<li>🎁 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</li>
-			<li>✨ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</li>
-			<li>🧤 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</li>
-			<li>🎉 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</li>
-			<li>🎊 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</li>
-			<li>🧨 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec</li>
-		</ul>`,
-	],
+	spec: dbSpecs,
+	description: dbDescriptions,
 	cart: [],
 	showLoginDropdown: false,
 };
@@ -186,25 +90,21 @@ export const MemoryProvider = ({ children }: any) => {
 		return auth.signInWithPopup(provider);
 	};
 
-	function getCollection(collectionName: string = "", documentName: string = "") {
-		if (collectionName === "") {
-			return;
-		}
-		if (documentName === "") {
-			return db.collection(collectionName).get();
-		}
+	function fbGetCollection(collectionName: string = "", documentName: string = "") {
+		if (collectionName === "") return;
+		if (documentName === "") return db.collection(collectionName).get();
 		return db.collection(collectionName).doc(documentName).get();
 	}
 
-	function signup(email: string, password: string) {
+	function fbSignup(email: string, password: string) {
 		return auth.createUserWithEmailAndPassword(email, password);
 	}
 
-	function logIn(email: string, password: string) {
+	function fbLogin(email: string, password: string) {
 		return auth.signInWithEmailAndPassword(email, password);
 	}
 
-	function logOut() {
+	function fbLogout() {
 		return auth.signOut();
 	}
 
@@ -224,10 +124,11 @@ export const MemoryProvider = ({ children }: any) => {
 		loginProviders,
 		addToCart,
 		removeFromCart,
-		signup,
-		logIn,
+		fbSignup,
+		fbLogin,
 		signInWithProvider,
-		logOut,
+		fbLogout,
+		toast,
 	};
 
 	return <MemoryContext.Provider value={values}>{children}</MemoryContext.Provider>;

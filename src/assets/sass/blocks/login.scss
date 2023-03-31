@@ -6,19 +6,26 @@
 	padding: 0.5rem 0.75rem;
 	background-color: #fff;
 	border-radius: 0.5rem;
-	&__header {
-		font-weight: 600;
-		font-size: 1.25rem;
-	}
+	font-size: 0.85rem;
 	&__body {
 		@include flex(column);
 		row-gap: 1rem;
+		& * {
+			font-size: inherit !important;
+		}
+		& > button {
+			text-transform: capitalize;
+		}
 	}
 	&__footer {
-		color: #000;
-		@include flex(row, center, center);
-		column-gap: 0.5rem;
-		font-size: 0.85rem;
+		column-gap: 0.25rem;
+		justify-content: center;
+		& button {
+			text-transform: unset;
+			padding: 0 0.25rem;
+			width: fit-content;
+			min-width: unset;
+		}
 	}
 	&[data-type="login"] {
 		& .login__confirmPass {
@@ -26,8 +33,12 @@
 		}
 	}
 	&[data-type="logout"] {
-		& .login__body {
+		& .MuiCardContent-root {
 			display: none;
+		}
+		& .MuiCardActions-root button {
+			min-width: 64px;
+			padding: 6px 16px;
 		}
 	}
 }

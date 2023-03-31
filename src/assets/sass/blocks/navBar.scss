@@ -66,9 +66,13 @@
 	}
 	&__login {
 		position: relative;
+		max-width: 140px;
 		&.open {
 			.navBar__login-dropdown {
 				display: block;
+			}
+			.navBar__login-l2 > svg {
+				transform: rotateX(180deg);
 			}
 		}
 		&-btn {
@@ -82,6 +86,7 @@
 			}
 		}
 		&-l1 {
+			@include truncate-text();
 			line-height: 110%;
 		}
 		&-l2 {

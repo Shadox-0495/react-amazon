@@ -47,12 +47,13 @@ export function formatPrice(price: number) {
 }
 
 export default function Product() {
-	const { products, addToCart, spec, description } = useMemory();
+	const { products, addToCart, spec, description, toast } = useMemory();
 	const [currentProduct, setCurrentProduct]: any = useState({});
 	const { id } = useParams();
 
 	function addProductToCart() {
 		addToCart(currentProduct);
+		toast.success("🎉Product added to shopping cart.🎉", { position: "bottom-right", autoClose: 1000 });
 	}
 
 	useEffect(() => {

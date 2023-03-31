@@ -4,7 +4,7 @@ import ConfirmModal from "../assets/components/confirmModal";
 import { formatRating } from "./product";
 
 export default function CheckOut() {
-	const { cart, removeFromCart } = useMemory();
+	const { cart, removeFromCart, toast } = useMemory();
 	const [openModal, setOpenModal] = useState(false);
 	const [selectedProduct, setSelectedProduct] = useState({});
 	const subTotal = cart.reduce((a: number, b: any) => a + b["price"] * b["quantity"], 0).toLocaleString("en-US");
@@ -12,6 +12,7 @@ export default function CheckOut() {
 
 	function removeProduct() {
 		removeFromCart(selectedProduct);
+		toast.warn("Product removed from shopping cart.", { position: "bottom-right", autoClose: 1000 });
 		setOpenModal(false);
 	}
 

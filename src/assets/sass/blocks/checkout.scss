@@ -31,6 +31,13 @@
 		text-align: center;
 		padding: 2rem 1rem;
 	}
+	&__timestamp {
+		font-size: 0.85rem;
+		font-weight: 600;
+		& > span {
+			font-weight: 400;
+		}
+	}
 	&__product {
 		@include flex(row, null, center);
 		column-gap: 1rem;
@@ -70,7 +77,7 @@
 		&-qty {
 			font-size: 0.85rem;
 			width: fit-content;
-			border: 1px solid #000;
+			border: 1px solid rgba(0, 0, 0, 0.25);
 			border-radius: 7px;
 			padding: 0.25rem 0.75rem;
 			background-color: #f0f2f2;

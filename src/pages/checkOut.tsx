@@ -2,9 +2,34 @@ import React, { useState } from "react";
 import useMemory from "../assets/features/memory";
 import ConfirmModal from "../assets/components/confirmModal";
 import { formatRating } from "./product";
+import CheckoutProduct from "../assets/components/checkoutProduct";
+
+export function getBrowserDate(type: string = "full") {
+	const d = new Date();
+	const types: Record<string, () => string> = {
+		full: () => `${d.getFullYear()}-${`0${d.getMonth()}`.slice(-2)}-${`0${d.getDate()}`.slice(-2)}`,
+		day: () => `${`0${d.getDate()}`.slice(-2)}`,
+		month: () => `${`0${d.getMonth()}`.slice(-2)}`,
+		year: () => `${d.getFullYear()}`,
+	};
+	//if (!types[type]) return;
+	return types[type]() ?? "";
+}
+
+export function getBrowserTime(type: string = "full") {
+	const d = new Date();
+	const types: Record<string, () => string> = {
+		full: () => `${d.getHours()}:${`0${d.getMinutes()}`.slice(-2)}:${`0${d.getSeconds()}`.slice(-2)}`,
+		seconds: () => `${`0${d.getSeconds()}`.slice(-2)}`,
+		minutes: () => `${`0${d.getMinutes()}`.slice(-2)}`,
+		hours: () => `${d.getHours()}`,
+	};
+	//if (!types[type]) return;
+	return types[type]() ?? "";
+}
 
 export default function CheckOut() {
-	const { cart, removeFromCart, toast } = useMemory();
+	const { currentUser, db, showLogin, cart, removeFromCart, clearCart, toast } = useMemory();
 	const [openModal, setOpenModal] = useState(false);
 	const [selectedProduct, setSelectedProduct] = useState({});
 	const subTotal = cart.reduce((a: number, b: any) => a + b["price"] * b["quantity"], 0).toLocaleString("en-US");
@@ -14,6 +39,30 @@ export default function CheckOut() {
 		removeFromCart(selectedProduct);
 		toast.warn("Product removed from shopping cart.", { position: "bottom-right", autoClose: 1000 });
 		setOpenModal(false);
+	}
+
+	async function completePurchase() {
+		if (!currentUser) {
+			showLogin(true);
+			return;
+		}
+		const dateFormat = new Intl.DateTimeFormat("en-US", {
+			year: "numeric",
+			month: "numeric",
+			day: "numeric",
+			hour: "numeric",
+			minute: "numeric",
+			second: "numeric",
+		});
+		let date = dateFormat.format(Date.now());
+		try {
+			await db.collection("users").doc(currentUser.multiFactor.user.uid).collection("orders").doc(`${getBrowserDate()}_${getBrowserTime()}`).set({ created: date, cart });
+			clearCart();
+			toast.success("🎉Purchase saved.🎉", { position: "bottom-right", autoClose: 1000 });
+		} catch (err) {
+			console.log(err);
+			toast.error(`Error while saving purchase. ${err}`, { position: "bottom-right" });
+		}
 	}
 
 	return (
@@ -26,41 +75,20 @@ export default function CheckOut() {
 							<li className="checkout__empty"> Your shopping cart is empty</li>
 						) : (
 							cart.map((product: any) => {
-								const { name, img, price, quantity, rating } = product;
-								return (
-									<li className="checkout__product">
-										<img className="checkout__image" src={`/assets/img/products/${img}`} alt=""></img>
-										<div className="checkout__description">
-											<div className="checkout__description-name">{name}</div>
-											<div className="detail__rate">{formatRating(rating).map((item) => item)}</div>
-											<div className="checkout__description-price">${price.toLocaleString("en-US")}</div>
-											<div className="checkout__description-actions">
-												<span className="checkout__description-qty">
-													<span>Qty: </span>
-													<span>{quantity.toLocaleString("en-US")}</span>
-												</span>
-												<span>
-													<button
-														className="checkout__description-remove"
-														onClick={() => {
-															setSelectedProduct(product);
-															setOpenModal(true);
-														}}
-													>
-														Remove
-													</button>
-												</span>
-											</div>
-										</div>
-									</li>
-								);
+								return <CheckoutProduct data={product} />;
 							})
 						)}
 					</ul>
 					<div className="checkout__subTotal">
 						<span className="checkout__subTotal-label">Sub total ( {totalItems} Items ) :</span>
 						<span className="checkout__subTotal-value">${subTotal}</span>
-						<button className="checkout__btnCehckout">Proceed with checkout</button>
+						{cart.length == 0 ? (
+							""
+						) : (
+							<button className="checkout__btnCehckout" onClick={completePurchase}>
+								{!currentUser ? "Sign in to complete the purchase" : "Buy now"}
+							</button>
+						)}
 					</div>
 				</div>
 			</div>

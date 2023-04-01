@@ -76,7 +76,7 @@ select {
 
 a:link,
 a:visited {
-	color: var(--linkTextColor) !important;
+	color: var(--linkTextColor);
 	text-decoration: none;
 }
 

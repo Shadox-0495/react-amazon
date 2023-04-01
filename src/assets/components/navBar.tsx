@@ -36,10 +36,10 @@ export default function NavBar() {
 						<Login />
 					</div>
 				</div>
-				<div className="navBar__returns">
+				<Link className="navBar__returns" to="/orders">
 					<div className="navBar__returns-l1">Returns</div>
 					<div className="navBar__returns-l2">& Orders</div>
-				</div>
+				</Link>
 				<Link className="navBar__cart" to="/checkout">
 					<div className="navBar__cart-icon" data-quantity={cart.reduce((a: number, b: any) => a + b["quantity"], 0) || 0}></div>
 					<div className="navBar__cart-text">Cart</div>

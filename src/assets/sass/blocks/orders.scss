@@ -1,0 +1,17 @@
+.pageSection[data-page="orders"] {
+	@include flex(column);
+	background-color: transparent;
+	padding-top: 1.5rem;
+	& > * {
+		z-index: 1;
+	}
+	&::before {
+		content: "";
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		background-color: #fff;
+	}
+}

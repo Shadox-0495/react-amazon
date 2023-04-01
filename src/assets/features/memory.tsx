@@ -30,6 +30,8 @@ const memoryReducer = (state: any, action: any) => {
 			return { ...state, cart: payload.cart };
 		case "REMOVE_PRODUCT":
 			return { ...state, cart: payload.cart };
+		case "CLEAR_CART":
+			return { ...state, cart: payload.cart };
 		case "SHOW_LOGIN":
 			return { ...state, showLoginDropdown: payload.show };
 		default:
@@ -74,6 +76,15 @@ export const MemoryProvider = ({ children }: any) => {
 
 		dispatch({
 			type: "REMOVE_PRODUCT",
+			payload: { cart },
+		});
+	};
+
+	const clearCart = () => {
+		const cart: any = [];
+		window.localStorage.setItem("cart", JSON.stringify(cart));
+		dispatch({
+			type: "CLEAR_CART",
 			payload: { cart },
 		});
 	};
@@ -124,10 +135,12 @@ export const MemoryProvider = ({ children }: any) => {
 		loginProviders,
 		addToCart,
 		removeFromCart,
+		clearCart,
 		fbSignup,
 		fbLogin,
 		signInWithProvider,
 		fbLogout,
+		db,
 		toast,
 	};
 

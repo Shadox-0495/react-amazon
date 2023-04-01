@@ -5,6 +5,7 @@ import NavBar from "../assets/components/navBar";
 import Home from "./home";
 import Product from "./product";
 import CheckOut from "./checkOut";
+import Orders from "./orders";
 
 function App() {
 	return (
@@ -16,6 +17,7 @@ function App() {
 					<Route path="/" element={<Home />} />
 					<Route path="/checkout" element={<CheckOut />} />
 					<Route path="/product/:id" element={<Product />} />
+					<Route path="/orders" element={<Orders />} />
 				</Routes>
 			</Router>
 		</>

@@ -5,7 +5,7 @@ Before starting the project add your env variables in a .env file at the project
 npm start
 ```
 
-### :computer: Tools used during development:
+### :computer: Tools used in this project:
 <img align="left" alt="VScode" width="40px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg">
 <img align="left" alt="Git" width="40px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg">
 <img align="left" alt="SASS" width="40px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sass/sass-original.svg" />

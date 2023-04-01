@@ -60,7 +60,6 @@ export default function CheckOut() {
 			clearCart();
 			toast.success("🎉Purchase saved.🎉", { position: "bottom-right", autoClose: 1000 });
 		} catch (err) {
-			console.log(err);
 			toast.error(`Error while saving purchase. ${err}`, { position: "bottom-right" });
 		}
 	}

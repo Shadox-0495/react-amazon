@@ -97,7 +97,6 @@ export const MemoryProvider = ({ children }: any) => {
 	};
 
 	const signInWithProvider = (provider: any) => {
-		console.log(provider);
 		return auth.signInWithPopup(provider);
 	};
 

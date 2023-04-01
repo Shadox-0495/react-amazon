@@ -15,7 +15,6 @@ export default function Orders() {
 			.onSnapshot((snapshot: any) => {
 				setOrders(snapshot.docs.map((doc: any) => ({ ...doc.data() })));
 			});
-		console.log(setOrders);
 	}, [currentUser]);
 
 	return (

@@ -120,7 +120,7 @@ export default function Login(props: any) {
 			await fbLogout();
 			navigate("/");
 		} catch (err) {
-			console.log(err);
+			toast.error(`Caught error while trying to logout: ${err}`, { position: "bottom-right" });
 		}
 		setLoading(false);
 	}

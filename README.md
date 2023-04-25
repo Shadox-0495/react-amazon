@@ -2,9 +2,9 @@
 
 ![alt text](https://github.com/Shadox-0495/react-amazon/blob/master/img/cover.png?raw=true)
 
-Note: Change the firebase's enviromental variables in the <kbd>.env</kbd> file to your needs
+Note: Change the firebase's enviromental variables in the <kbd>.env</kbd> file suit your needs.
 
-Open the project folder and install the dependencies using
+Open the project folder and install the dependencies using:
 
 ```sh
 npm i
